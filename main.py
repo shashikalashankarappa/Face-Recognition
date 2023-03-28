@@ -3,6 +3,7 @@ import tensorflow
 from tensorflow.keras.utils import load_img
 from keras.preprocessing.image import img_to_array 
 from keras.applications.vgg16 import preprocess_input 
+import glob, os
 
 # models 
 from keras.applications.vgg16 import VGG16 
@@ -78,7 +79,7 @@ feat = np.array(list(data.values()))
 feat = feat.reshape(-1,4096)
 
 # get the unique labels (from the flower_labels.csv)
-label = df['label'].tolist()
+label = ['label'].tolist()
 unique_labels = list(set(label))
 
 
@@ -130,3 +131,5 @@ for k in list_k:
     km.fit(x)
     
     sse.append(km.inertia_)
+    with glob.iglob('/pardadox-music/**', recursive=True) as file:
+        sse.append(file)
